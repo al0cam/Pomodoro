@@ -1,59 +1,79 @@
-# Pomodoro
+Pomodoro UI - Task Management & Focus Timer
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+Pomodoro UI is the frontend component of a web application designed to help you manage your tasks and boost your productivity using the Pomodoro Technique. Built with Angular, Tailwind CSS, and DaisyUI, it offers a fast, responsive, and intuitive user experience.
+Features
 
-## Development server
+    Customizable Pomodoro Timer: A central timer allows you to set precise intervals for focus (Pomodoro), short breaks, and long breaks. It features start, pause, and reset controls.
+    Interactive Task List: Easily add new tasks with titles, descriptions, and estimated Pomodoro counts.
+    Completion Tracking: Mark tasks as completed with a visual strikethrough.
+    Expandable Task Details: Click on any task title to expand and view its full description and Pomodoro progress.
+    Responsive Design: The UI is built using Tailwind CSS and DaisyUI classes, ensuring it looks and functions great across all devices (desktop, tablet, mobile).
+    Modern Angular Architecture: Utilizes Angular Standalone Components and Signals for a streamlined development experience and efficient reactivity.
 
-To start a local development server, run:
+Technologies Used
 
-```bash
-ng serve
-```
+    Angular: A powerful framework for building single-page applications, leveraging its modern features like Standalone Components and Signals.
+    TypeScript: Provides static typing for improved code quality, maintainability, and developer tooling.
+    Tailwind CSS: A utility-first CSS framework for rapidly building custom designs. Its configuration in tailwind.config.js dictates how CSS is generated.
+    DaisyUI: A component library built on top of Tailwind CSS, providing ready-to-use UI elements. It functions as a Tailwind CSS plugin.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Getting Started
 
-## Code scaffolding
+Follow these steps to get a copy of the Pomodoro UI running on your local machine.
+Prerequisites
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Ensure you have the following installed:
 
-```bash
-ng generate component component-name
-```
+    Node.js (LTS version recommended) & npm
+    Angular CLI: Install globally via npm install -g @angular/cli
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Frontend Setup
 
-```bash
-ng generate --help
-```
+    Clone the repository:
+    Bash
 
-## Building
+git clone https://github.com/al0cam/Pomodoro.git
+cd Pomodoro
 
-To build the project run:
+Note: This README assumes your repository contains the frontend code directly in the root or in a frontend/ subdirectory. Adjust cd frontend if necessary to navigate to your Angular project's root.
+Install npm dependencies:
+Bash
 
-```bash
-ng build
-```
+npm install
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Start the Angular development server:
+Bash
 
-## Running unit tests
+    ng serve
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+    The Angular application will typically be available at http://localhost:4200. Your browser should automatically open it.
 
-```bash
-ng test
-```
+Project Structure
 
-## Running end-to-end tests
+The UI part of the project is organized as a standard Angular application:
 
-For end-to-end (e2e) testing, run:
+    src/app/: Contains the main application logic and components.
+        app.component.ts: The root component of the application.
+        app.component.html: The main template for the root component.
+        app.component.spec.ts: Unit tests for the root component.
+        app.config.ts: Configuration for standalone application providers (e.g., HttpClient, Router).
+        app.routes.ts: Defines the application's top-level routes (if routing is implemented).
+        interfaces/: Directory for TypeScript interfaces (e.g., task-item.interface.ts).
+        services/: Directory for Angular services (e.g., task-item.service.ts for backend communication).
+        task-item/: Contains the TaskItemComponent for displaying individual tasks.
 
-```bash
-ng e2e
-```
+Future Enhancements
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+    Backend Integration (Full): Connect to a backend API to persist tasks, implementing CRUD operations.
+    User Authentication: Add login/registration features to enable personalized task lists.
+    Advanced Timer Features: Implement customizable sound alerts, notifications, and integration with OS features.
+    Task Management Enhancements: Add drag-and-drop reordering, task editing, due date pickers, and filtering options.
+    Settings Page: Allow users to configure Pomodoro durations, break times, and UI preferences.
+    Analytics/Reporting: Track productivity metrics over time.
 
-## Additional Resources
+Contributing
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Contributions are welcome! If you have suggestions for new features, improvements, or bug fixes, please feel free to open an issue or submit a pull request.
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
