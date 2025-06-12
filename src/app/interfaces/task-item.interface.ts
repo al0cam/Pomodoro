@@ -8,4 +8,5 @@ export interface TaskItem {
   estimatedPomodoros?: number;
   completedPomodoros?: number;
   isExpanded?: boolean;
+  userId?: string;
 }

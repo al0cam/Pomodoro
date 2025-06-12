@@ -1,17 +1,18 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CommonModule, NgIf } from "@angular/common";
-import { TaskItem } from "../interfaces/task-item.interface"; // Import the interface
+import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { TaskItem } from "../interfaces/task-item.interface";
 
 @Component({
-  selector: "app-task-item", // Custom HTML tag for this component
-  standalone: true, // Marks this as a standalone component, no NgModule needed
-  imports: [CommonModule, NgIf], // CommonModule for NgIf, NgFor, etc.
+  selector: "app-task-item",
+  standalone: true,
+  imports: [CommonModule, NgIf],
   template: `
     <div
-      class="card bg-base-100 shadow-md transition-all duration-300 overflow-hidden"
+      class="card bg-base-100 shadow-md transition-all duration-300 overflow-hidden border-l-8"
       [ngClass]="{
-        'opacity-70 border-l-8 border-green-500': task.isCompleted,
-        'border-l-8 border-primary hover:shadow-lg': !task.isCompleted
+        'border-accent': isActiveTask,
+        'border-green-500 opacity-70': task.isCompleted && !isActiveTask,
+        'border-primary hover:shadow-lg': !task.isCompleted && !isActiveTask
       }"
     >
       <div class="card-body p-4 flex-row items-center">
@@ -21,30 +22,50 @@ import { TaskItem } from "../interfaces/task-item.interface"; // Import the inte
           [checked]="task.isCompleted"
           (change)="toggleCompletion.emit(task.id)"
           class="checkbox checkbox-primary h-6 w-6 flex-shrink-0"
+          [disabled]="!allowEditDelete"
         />
 
         <!-- Task Title and Pomodoros Info -->
         <div class="flex-grow ml-4">
           <h3
             class="card-title text-xl font-semibold cursor-pointer"
-            [ngClass]="{'line-through text-gray-500': task.isCompleted, 'text-gray-400': !task.isCompleted}"
+            [ngClass]="{'line-through text-gray-400': task.isCompleted, 'text-white': !task.isCompleted}"
             (click)="toggleExpansion.emit(task.id)"
           >
             {{ task.title }}
           </h3>
-          <!-- Display pomodoro progress if available -->
-          <p *ngIf="task.estimatedPomodoros != null || (task.completedPomodoros != null && task.completedPomodoros > 0)" class="text-sm text-gray-600 mt-1">
+          <p *ngIf="task.estimatedPomodoros != null || (task.completedPomodoros != null && task.completedPomodoros > 0)" class="text-sm text-gray-300 mt-1">
             Pomodoros: {{ task.completedPomodoros || 0 }}
             <span *ngIf="task.estimatedPomodoros != null"> / {{ task.estimatedPomodoros }}</span>
-            <span class="ml-2">🍅</span> <!-- Simple pomodoro icon -->
+            <span class="ml-2">🍅</span>
           </p>
         </div>
+
+        <!-- Set Active Button (Conditional based on login and if not already active) -->
+        <button
+          *ngIf="allowEditDelete && !isActiveTask"
+          (click)="setActive.emit(task.id)"
+          class="btn btn-sm btn-info ml-2"
+          aria-label="Set as active task"
+        >
+          Set Active
+        </button>
+
+        <!-- Clear Active Button (Conditional based on login and if it is active) -->
+        <button
+          *ngIf="allowEditDelete && isActiveTask"
+          (click)="clearActive.emit(task.id)"
+          class="btn btn-sm btn-ghost ml-2"
+          aria-label="Clear active task"
+        >
+          Clear Active
+        </button>
 
         <!-- Expand/Collapse Button (only shown if description exists) -->
         <button
           *ngIf="task.description"
           (click)="toggleExpansion.emit(task.id)"
-          class="btn btn-ghost btn-circle ml-4 text-gray-600"
+          class="btn btn-ghost btn-circle ml-4 text-gray-300"
           [attr.aria-expanded]="task.isExpanded"
           [attr.aria-label]="task.isExpanded ? 'Collapse description' : 'Expand description'"
         >
@@ -60,8 +81,9 @@ import { TaskItem } from "../interfaces/task-item.interface"; // Import the inte
           </svg>
         </button>
 
-        <!-- Delete Button -->
+        <!-- Delete Button (Conditional based on login) -->
         <button
+          *ngIf="allowEditDelete"
           (click)="deleteTask.emit(task.id)"
           class="btn btn-error btn-circle btn-sm ml-2"
           [attr.aria-label]="'Delete task ' + task.title"
@@ -73,19 +95,20 @@ import { TaskItem } from "../interfaces/task-item.interface"; // Import the inte
       </div>
 
       <!-- Task Description (conditionally rendered when expanded) -->
-      <div *ngIf="task.isExpanded && task.description" class="p-4 pt-0 text-gray-700 border-t border-gray-200 mt-2">
+      <div *ngIf="task.isExpanded && task.description" class="p-4 pt-0 text-gray-200 border-t border-gray-700 mt-2">
         <p class="whitespace-pre-wrap">{{ task.description }}</p>
       </div>
     </div>
   `,
-  styles: [], // No external CSS file, all styles inline or via Tailwind/DaisyUI classes
+  styles: [],
 })
 export class TaskItemComponent {
-  // Input property to receive task data from parent component
   @Input() task!: TaskItem;
-
-  // Output events to notify parent about user actions
+  @Input() allowEditDelete = false;
+  @Input() isActiveTask = false;
   @Output() toggleCompletion = new EventEmitter<number>();
   @Output() toggleExpansion = new EventEmitter<number>();
-  @Output() deleteTask = new EventEmitter<number>(); // New output for delete
+  @Output() deleteTask = new EventEmitter<number>();
+  @Output() setActive = new EventEmitter<number>();
+  @Output() clearActive = new EventEmitter<number>();
 }

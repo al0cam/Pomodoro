@@ -1,12 +1,24 @@
-import type { ApplicationConfig } from "@angular/core";
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from "@angular/common/http";
+import { ApplicationConfig } from "@angular/core";
 import { provideRouter } from "@angular/router";
-import { provideHttpClient } from "@angular/common/http"; // Import provideHttpClient
+import { AuthInterceptor } from "./interceptors/auth.interceptor";
+import { SettingsService } from "./services/settings.service";
 
-import { routes } from "./app.routes"; // Assuming you have app.routes.ts for routing
+import { routes } from "./app.routes";
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(), // Provide HttpClient here to make it available for injection
+    provideHttpClient(withInterceptorsFromDi()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    SettingsService,
   ],
 };
