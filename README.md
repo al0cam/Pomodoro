@@ -1,7 +1,6 @@
 # Pomodoro UI - Task Management & Focus Timer
 
-![image](https://github.com/user-attachments/assets/2788c86f-b6b3-4c8c-820a-ee4ae845e076)
-
+![image](https://github.com/user-attachments/assets/76ab62e9-d06f-4108-9b2f-eddafdfd47c8)
 
 Pomodoro UI is the frontend component of a web application designed to help you manage your tasks and boost your productivity using the Pomodoro Technique. Built with **Angular**, **Tailwind CSS**, and **DaisyUI**, it offers a fast, responsive, and intuitive user experience.
 
