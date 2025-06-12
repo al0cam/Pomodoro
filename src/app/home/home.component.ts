@@ -25,7 +25,7 @@ import { TaskItemComponent } from "../task-item/task-item.component";
       <!-- Pomodoro Timer Section -->
       <div class="card-body text-center mb-8">
         <div class="flex justify-center items-center relative mb-6">
-          <h1 class="text-4xl md:text-5xl font-extrabold text-white">Pomodoro Pro</h1>
+          <h1 class="text-4xl md:text-5xl font-extrabold text-white">Pomodoro</h1>
           <!-- Removed pencil icon as settings are now in a dedicated tab -->
         </div>
 
