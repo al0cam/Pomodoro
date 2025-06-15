@@ -9,7 +9,7 @@ import { SettingsService } from "../services/settings.service";
   standalone: true,
   imports: [CommonModule, FormsModule, NgIf],
   template: `
-<div class="card bg-base-200 shadow-2xl max-w-4xl mx-auto">
+<div class="min-h-[70dvh] card bg-base-200 shadow-2xl max-w-4xl mx-auto">
   <div class="card-body p-8 md:p-12">
     <!-- Header Section -->
     <div class="text-center mb-12">

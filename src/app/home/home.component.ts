@@ -21,7 +21,7 @@ import { TaskItemComponent } from "../task-item/task-item.component";
   standalone: true,
   imports: [CommonModule, FormsModule, NgIf, NgFor, TaskItemComponent],
   template: `
-    <div class="card bg-base-100 shadow-xl rounded-3xl p-8 max-w-2xl w-full">
+    <div class="card bg-base-100 shadow-xl min-h-[70dvh] rounded-3xl p-8 max-w-2xl w-full">
       <!-- Pomodoro Timer Section -->
       <div class="card-body text-center mb-8">
         <div class="flex justify-center items-center relative mb-6">
@@ -133,7 +133,7 @@ import { TaskItemComponent } from "../task-item/task-item.component";
 
 
       <!-- Task List Display -->
-      <div class="space-y-4">
+      <div *ngIf="authService.isAuthenticated()" class="space-y-4">
         <p *ngIf="sortedTasks().length === 0" class="text-center text-gray-300 text-lg py-8">No tasks yet! Add one above to get started.</p>
         <app-task-item
           *ngFor="let task of sortedTasks(); trackBy: trackById"

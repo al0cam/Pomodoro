@@ -1,12 +1,12 @@
 import { CommonModule, NgIf } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
-import { Router, RouterLink, RouterOutlet } from "@angular/router";
+import { Router, RouterOutlet } from "@angular/router";
 import { AuthService } from "./services/auth.service";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [CommonModule, NgIf, RouterOutlet, RouterLink],
+  imports: [CommonModule, NgIf, RouterOutlet],
   template: `
     <div class="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-700 flex flex-col items-center justify-center py-10 px-4 font-inter text-white">
       <div class="card bg-base-100 shadow-xl rounded-3xl p-8 max-w-2xl w-full">
@@ -45,9 +45,9 @@ export class AppComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   navigateToLogin(): void {
     this.router.navigate(["/login"]);

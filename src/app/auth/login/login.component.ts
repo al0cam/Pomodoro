@@ -10,7 +10,7 @@ import { AuthService } from "../../services/auth.service";
   standalone: true,
   imports: [CommonModule, FormsModule, NgIf, RouterLink],
   template: `
-    <div class="min-h-screen flex items-center justify-center py-10 px-4 font-inter text-white">
+    <div class="min-h-[70dvh] flex items-center justify-center py-10 px-4 font-inter text-white">
       <div class="card bg-transparent shadow-none rounded-3xl p-8 max-w-md w-full border border-white/20 backdrop-blur-sm">
         <div class="card-body text-center">
           <h2 class="card-title text-3xl font-bold text-white mb-6 justify-center">Login</h2>
@@ -71,7 +71,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-  ) {}
+  ) { }
 
   onLogin(): void {
     this.isLoggingIn.set(true);
